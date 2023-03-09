@@ -11,15 +11,15 @@ public class Main {
     BST<Integer> bst = new NonEmptyBST<Integer>(78);
     bst = bst.insert(31);
     bst = bst.insert(13);
-    bst = bst.insert(10);
-    bst = bst.insert(12);
-    bst = bst.insert(38);
-    bst = bst.insert(40);
-    bst = bst.insert(39);
-    bst = bst.insert(47);
-    bst = bst.insert(84);
+//    bst = bst.insert(10);
+//    bst = bst.insert(12);
+//    bst = bst.insert(38);
+//    bst = bst.insert(40);
+//    bst = bst.insert(39);
+//    bst = bst.insert(47);
+//    bst = bst.insert(84);
 
-    bst.printBreadthFirstTraversal();
+    bst.remove(13);
 
 //    System.out.println(bst.getElement());
 //    System.out.println(bst.getLeft().getElement());

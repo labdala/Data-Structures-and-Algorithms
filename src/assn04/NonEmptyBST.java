@@ -20,9 +20,6 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	public BST<T> insert(T element) {
 		int elementInt = convertToInt(element);
 		int _elementInt = convertToInt(_element);
-//		System.out.println("-----------------");
-//		System.out.println("HEAD_element="+_element+", _elementInt="+_elementInt);
-//		System.out.println("want to introduce element="+element+", elementInt="+elementInt);
 		BST<T> returningBST = new EmptyBST<T>();
 		if(elementInt<_elementInt)
 		{
@@ -40,18 +37,12 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		else if(elementInt>_elementInt)
 		{
 			if(_right.isEmpty()) {
-//				System.out.println("introduce in the right");
 				_right = new NonEmptyBST<T>(element);
 				return this;
 			}
 			else
 				_right.insert(element);
 		}
-//		else
-//		{
-//			throw new Exception("Not implemented");
-//		}
-
 		return this;
 	}
 
@@ -106,47 +97,12 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		return this;
 	}
 
-	public BST<T> searchElement(T element)  { // NOT WORKING per test in printBreadthFirstTraversal
-												// it returns the global head of the tree
-		BST<T> result = new EmptyBST<T>();
-		if(element.compareTo(_element)<0)
-			_left.searchElement(element);
-		else if(element.compareTo(_element)>0)
-			result = _right;
-		else if(element==_element)
-			return result;
-		return result.searchElement(element);
-	}
-//
-//	public void deleteGivenNode(BST<T> bst) { // need help
-//		if(bst.getLeft().isEmpty() && bst.getRight().isEmpty())
-//			bst = new EmptyBST<T>(); // does this look ok to delete a node?
-//		else if(bst.getLeft().isEmpty())
-//		{
-//			_element = _right.getElement();
-//			_right = new EmptyBST<T>();
-//		}
-//		else if(bst.getRight().isEmpty())
-//		{
-//			_element = _left.getElement();
-//			_left = new EmptyBST<T>();
-//		}
-//		else
-//		{
-//			BST<T> sucessor = findMinNode(_right); // declaration is wrong here?
-//			_element = sucessor.getElement();
-//			deleteGivenNode(sucessor);
-//		}
-//	}
-
 	public BST<T> findMinNode(BST<T> bst) { // ok!
 		if(bst.getLeft().isEmpty())
 			return bst;
 		else
 			return(findMinNode(bst.getLeft()));
 	}
-
-
 
 	// TODO: printPreOrderTraversal
 	@Override
@@ -173,30 +129,6 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 
 	// TODO: printBreadthFirstTraversal
-//	@Override
-//	public void printBreadthFirstTraversal() {
-//		Queue<T> queue = new LinkedList<T>();
-// 		BST<T> bst = this;
-//		 int c=0;
-//		while(!(queue.isEmpty()) || c==0)
-//		{
-//			queue.add(bst.getElement());
-//			if (!bst.getLeft().isEmpty()) {
-//				queue.add(_left.getElement());
-//			}
-//			if (!bst.getRight().isEmpty()) {
-//				queue.add(_right.getElement());
-//			}
-//			T removed = queue.remove();
-//			bst =  searchElement(queue.peek());
-//			System.out.print(removed.toString() + " ");
-//			c++;
-//		}
-////
-//	}
-
-
-
 	@Override
 	public void printBreadthFirstTraversal() {
 		Queue<BST<T>> queue = new LinkedList<>();
@@ -207,10 +139,10 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 			BST<T> removed = queue.remove();
 			System.out.print(removed.getElement().toString() + " ");
 
-			if (removed.getLeft().isEmpty()) {
+			if (!removed.getLeft().isEmpty()) {
 				queue.add(removed.getLeft());
 			}
-			if (this.getRight().isEmpty()) {
+			if (!removed.getRight().isEmpty()) {
 				queue.add(removed.getRight());
 			}
 		}
